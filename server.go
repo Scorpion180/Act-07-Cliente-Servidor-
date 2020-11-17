@@ -64,7 +64,7 @@ func Printer(valores *[]Valores, process chan int) {
 	}
 }
 
-func servidor(flg chan bool, close chan uint64, response chan bool) {
+func servidor() {
 	s, err := net.Listen("tcp", ":9999")
 	process := make(chan int)
 	NewProcess := make(chan Valores)
@@ -142,10 +142,7 @@ func handleClient(c net.Conn, val *[]Valores) {
 }*/
 
 func main() {
-	printFlag := make(chan bool)
-	closeRoutine := make(chan uint64)
-	response := make(chan bool)
-	go servidor(printFlag, closeRoutine, response)
+	go servidor()
 	var input string
 	fmt.Scanln(&input)
 }
